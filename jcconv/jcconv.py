@@ -5,6 +5,7 @@ __all__ = ['hira2kata', 'kata2hira', 'half2hira', 'hira2half', 'kata2half',
            'check_hira', 'check_kata', 'check_half']
 
 import re
+from six import text_type
 
 # convert hiragana to katakana
 def hira2kata(text, reserved=[]):
@@ -70,7 +71,7 @@ def convert(text, frm, to, reserved=[]):
             return dic[match.group(0)]
         return rx.sub(proc_one, text)
 
-    uflag = isinstance(text, unicode)
+    uflag = isinstance(text, text_type)
     f_set = jcconv.char_sets[frm]
     t_set = jcconv.char_sets[to]
 
@@ -89,7 +90,7 @@ def convert(text, frm, to, reserved=[]):
         raise "Invalid Parameter"
 
 def check(text, char_set_type):
-    uflag = isinstance(text, unicode)
+    uflag = isinstance(text, text_type)
     text = uflag and text or text.decode('utf-8')
     char_set = []
     for set in jcconv.char_sets[char_set_type]:
@@ -124,13 +125,13 @@ class jcconv:
 if __name__ == '__main__':
     import codecs, sys
     sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
-    
-    print convert(u'あいうえお', jcconv.HIRA, jcconv.HALF, [u'う'])
-    print convert(u'ばいおりん', jcconv.HIRA, jcconv.HALF)
-    print convert(u'ﾊﾞｲｵﾘﾝ', jcconv.HALF, jcconv.HIRA)
-    print convert(u'12345', jcconv.HNUM, jcconv.WNUM)
 
-    print check_hira(u'ひらがな')
-    print check_hira(u'カタカナ')
-    print check_kata(u'ひらがな')
-    print check_kata(u'カタカナ')
+    print(convert(u'あいうえお', jcconv.HIRA, jcconv.HALF, [u'う']))
+    print(convert(u'ばいおりん', jcconv.HIRA, jcconv.HALF))
+    print(convert(u'ﾊﾞｲｵﾘﾝ', jcconv.HALF, jcconv.HIRA))
+    print(convert(u'12345', jcconv.HNUM, jcconv.WNUM))
+
+    print(check_hira(u'ひらがな'))
+    print(check_hira(u'カタカナ'))
+    print(check_kata(u'ひらがな'))
+    print(check_kata(u'カタカナ'))

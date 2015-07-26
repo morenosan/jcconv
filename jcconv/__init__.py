@@ -25,8 +25,10 @@
        wide
 """
 
+from pkg_resources import get_distribution
+
 __author__  = "Matsumoto Taichi"
-__version__ = "0.2.3"
+__version__ = get_distribution('jcconv').version
 __license__ = "MIT License"
 
-from jcconv import *
+from .jcconv import *

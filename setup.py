@@ -1,40 +1,34 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
-import sys
-import unittest
+import os
 
-import jcconv
-from jcconv import __version__, __license__, __author__
+## Get long_description from index.txt:
+f = open(os.path.join('README.rst'))
+long_description = f.read().strip()
+f.close()
+
 
 if __name__ == '__main__':
-  from jcconv import jcconv_test
-  # run module test
-  loader = unittest.TestLoader()
-  result = unittest.TestResult()
-  suite  = loader.loadTestsFromModule(jcconv_test)
-  suite.run(result)
-  if not result.wasSuccessful():
-    print "unit tests have failed!"
-    print "aborted to make a source distribution"
-    sys.exit(1)
-
   # build distribution package
   setup(
     packages         = ('jcconv',),
     name             = 'jcconv',
-    version          = __version__,
+    version          = '0.2.3',
     py_modules       = ['jcconv', 'jcconv_test'],
     description      = 'jcconv "JapaneseCharacterCONVerter", interconvert hiragana, katakana, halfwidth kana',
-    long_description = jcconv.__doc__,
-    author           = __author__,
+    long_description = long_description,
+    author           = 'Matsumoto Taichi',
     author_email     = 'taichino@gmail.com',
     url              = 'http://github.com/taichino/jcconv',
     keywords         = 'japanese converter, hiragana, katakana, half-width kana',
-    license          = __license__,
+    license          = 'MIT License',
     classifiers      = ["Development Status :: 3 - Alpha",
                         "Intended Audience :: Developers",
                         "License :: OSI Approved :: MIT License",
                         "Operating System :: POSIX",
                         "Programming Language :: Python",
-                        "Topic :: Software Development :: Libraries :: Python Modules"]
+                        "Topic :: Software Development :: Libraries :: Python Modules"],
+    tests_require = ['six'],
+    test_suite = "jcconv.jcconv_test",
+    install_requires = ['six'],
     )
