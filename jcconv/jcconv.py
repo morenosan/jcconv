@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 
 __all__ = ['hira2kata', 'kata2hira', 'half2hira', 'hira2half', 'kata2half',
            'half2kata', 'half2wide', 'wide2half', 'convert',
@@ -87,7 +88,7 @@ def convert(text, frm, to, reserved=[]):
             text = _multiple_replace(text, conv_table)
         return uflag and text or text.encode('utf-8')
     else:
-        raise "Invalid Parameter"
+        raise ValueError("Invalid Parameter")
 
 def check(text, char_set_type):
     uflag = isinstance(text, text_type)

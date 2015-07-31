@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from __future__ import with_statement
+
 from setuptools import setup
+import codecs
 import os
 
-## Get long_description from index.txt:
-f = open(os.path.join('README.rst'))
-long_description = f.read().strip()
-f.close()
+with codecs.open(os.path.join('README.rst'), encoding='utf-8') as f:
+    long_description = f.read().strip()
 
 
 if __name__ == '__main__':
@@ -26,7 +27,14 @@ if __name__ == '__main__':
                         "Intended Audience :: Developers",
                         "License :: OSI Approved :: MIT License",
                         "Operating System :: POSIX",
-                        "Programming Language :: Python",
+                        "Programming Language :: Python :: 2",
+                        "Programming Language :: Python :: 2.5",
+                        "Programming Language :: Python :: 2.6",
+                        "Programming Language :: Python :: 2.7",
+                        "Programming Language :: Python :: 3",
+                        "Programming Language :: Python :: 3.3",
+                        "Programming Language :: Python :: 3.4",
+                        "Programming Language :: Python :: 3.5",
                         "Topic :: Software Development :: Libraries :: Python Modules"],
     tests_require = ['six'],
     test_suite = "jcconv.jcconv_test",
